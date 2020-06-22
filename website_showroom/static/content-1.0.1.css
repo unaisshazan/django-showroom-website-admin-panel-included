@@ -1,0 +1,105 @@
+/* Layout */
+h1, h2 { margin: 0; padding: 0; }
+
+#page  { margin-top: 25px; }
+#topbar { width: 100%; }
+#header { width: 100%; padding-top: 6px; }
+
+#page_header {
+   color: #222;
+	text-decoration: none;
+	font-style: italic;
+   font-size: 3.0em;
+}
+#sub_header { color:#282828; font-size: 1.25em; }
+.header_icons_div {
+	display:inline-block;
+	vertical-align: middle;
+	margin-left: 2px;
+	margin-bottom: 4px;
+}
+.header_icons_div i {
+	margin-top: 3px;
+}
+.bootstrap_icon_style {
+	font-size:18px !important;
+	color:#222 !important;
+	text-decoration: none !important;
+}
+#menu { margin-top: 30px;width: 100%; }
+.menu_elem, h3 {
+	margin-top:0; margin-left: 0; margin-bottom: 2px;
+	font-size: 1em;
+	font-weight: normal;
+	float: left;
+	padding: 10px;
+	margin-right: 2px;
+}
+.menu_elem a, h3 a {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	color: #fdfdfd;
+	text-decoration: none;
+}
+h3 a:active, h3 a:hover {
+	color: #fdfdfd;
+}
+#content {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	min-height: 400px;
+	margin-top: 50px;
+	width: 100%;
+}
+.project {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	float: left;
+	margin-right: 25px;
+}
+
+@media(max-width:767px){
+	.project { width: 288px;height: 382px; }
+	.project .description { height: 72px; }
+}
+@media(min-width:768px){
+	.project { width: 288px;height: 382px; }
+	.project .description { height: 72px; }
+}
+@media(min-width:992px){
+	.project { width: 288px;height: 382px; }
+	.project .description { height: 72px; }
+}
+@media(min-width:1200px){
+	.container {
+      width: 970px !important;
+    }
+	.project { width: 288px;height: 382px; }
+	.project .description { height: 72px; }
+}
+
+.project img { border: 1px solid #ccc;margin-bottom: 14px; }
+.project a { }
+.project .title {
+	float: left;
+	font-weight: bold;
+	margin-bottom: 12px;
+}
+.project .flag { float: right; margin-left: 10px; }
+.project .description { font-size: 0.9em; margin-bottom: 10px; }
+.project .url { font-size: 0.9em; }
+#footer {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.8em;
+	color: #222;
+	width: 100%;
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+#footer a {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+}
+
+
