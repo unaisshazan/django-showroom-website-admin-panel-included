@@ -1,0 +1,143 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>{{ act_edition.html_title }}{% if act_ed_cat %} - {{ act_ed_cat.name }}{% endif %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="{{ act_edition.country }}/rss/" />-->
+
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/static/content-1.0.1.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+<div class="container" id="page">
+<div id="topbar">
+    <div style="float:left;">
+        &nbsp;
+    </div>
+    <div style="float:right;text-align:right;margin-right:25px;">
+        
+        {% if act_edition.facebook_url %}
+        <div class="header_icons_div">
+          <a href="{{ act_edition.facebook_url }}" target="_blank" title="Facebook">
+            <i class="fa fa-facebook-square bootstrap_icon_style"></i>
+          </a>
+        </div>
+        {% endif %}
+        {% if act_edition.twitter_url %}
+        <div class="header_icons_div">
+          <a href="{{ act_edition.twitter_url }}" target="_blank" title="Twitter">
+            <i class="fa fa-twitter-square bootstrap_icon_style"></i>
+          </a>
+        </div>
+        {% endif %}
+        {% if act_edition.google_plus_url %}
+        <div class="header_icons_div">
+          <a href="{{ act_edition.google_plus_url }}" target="_blank" title="Google+">
+            <i class="fa fa-google-plus-square bootstrap_icon_style"></i>
+          </a>
+        </div>
+        {% endif %}
+      
+        <form method="get" action="/search/" style="display: inline-block;margin-left:10px;">
+            <input type="search" class="form-control" maxlength="50" size="30" placeholder="Search" name="q" value="{{ query }}" id="search_text" onKeyPress="if(event && event.keyCode==13) { if(document.getElementById('search_text').value != '') document.forms[0].submit();else return false;}" autocomplete="off"/>
+        </form>
+        
+        <div style="display:inline-block;margin-left:10px;">
+            {% for edition in edition_list %}
+            <div class="header_icons_div">
+                {% with 'world/'|add:edition.country|add:'.png' as edition_img_static %}
+                <a href="/{{ edition.country }}/">
+                    <img src="{% static edition_img_static %}" width="25" height="15">
+                </a>
+                {% endwith %}
+              
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div style="width:100%;clear:both;"></div>
+
+<div id="header">
+
+    <div style="float:left;">
+        <a href="/{{ act_edition.country }}/" style="text-decoration:none"><h1 id="page_header">{{ act_edition.site_title }}</h1></a>
+    </div>
+    <div style="float:right;text-align:right;margin-top:2px;margin-right:25px;">
+        <h2 id="sub_header">{% autoescape off %}{{ act_edition.site_subtitle }}{% endautoescape %}</h2>
+    </div>
+
+</div>
+
+<div style="width:100%;clear:both;"></div>
+
+{% if FACEBOOK_URL %}
+<div style="float:right;margin-top:40px;">
+    <script src="http://connect.facebook.net/de_DE/all.js#xfbml=1">
+    </script><fb:like href="{{ act_edition.facebook_url }}" layout="button_count" show_faces="false" width="135" font=""></fb:like>
+</div>
+{% endif %}
+
+{% block menu %}
+<div id="menu">
+{% for ed_cat in ed_category_list %}
+    <h3 class="menu_elem" id="menu_{{ forloop.counter }}" 
+        style="background-color:{% if ed_cat == act_ed_cat %}{{ed_cat.category.active_color}}{% else %}{{ ed_cat.category.color }}{% endif %}">
+        <a href="/{{ act_edition.country }}/{{ ed_cat.url_name }}" style="{% if ed_cat == act_ed_cat %}text-decoration:underline;{% endif %}">{{ ed_cat.name }}</a></h3>
+    <script>
+        $("#menu_{{ forloop.counter }}").mouseover(function() {
+            $(this).css("background-color", "{{ ed_cat.category.active_color }}");
+        });
+        $("#menu_{{ forloop.counter }}").mouseout(function() {
+            $(this).css("background-color", "{% if ed_cat == act_ed_cat %}{{ ed_cat.category.active_color }}{% else %}{{ ed_cat.category.color }}{% endif %}");
+        });
+        $("#menu_{{ forloop.counter }}").click(function(event) {
+            location.href="/{{ act_edition.country }}/";
+        });
+    </script>
+{% endfor %}
+</div>
+{% endblock %}
+
+<div style="clear:both;"></div>
+
+<div id="content">
+
+    {% block content %}
+    {% endblock %}
+
+</div>
+
+<div style="clear:both;"></div>
+<div id="footer">
+    <div style="float:left;">{% autoescape off %}{{ act_edition.footer_left }}{% endautoescape %}</div>
+    <div style="float:right;margin-right:25px;">{% autoescape off %}{{ act_edition.footer_right }}{% endautoescape %}
+    &nbsp;&nbsp; 
+    <a href="https://github.com/holgerd77/django-website-showroom" target="_blank">
+      <i class="fa fa-github"></i> Source Code
+    </a>
+     &nbsp;&nbsp; 
+    <a href="/{{ act_edition.country }}/contact/">
+        <i class="fa fa-pencil"></i> {{ act_edition.contact_title }}
+    </a>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+
+</div>
+
+</body>
+
+</html>

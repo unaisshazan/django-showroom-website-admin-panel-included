@@ -1,0 +1,17 @@
+*.py[co]
+.DS_Store
+*.sqlite3
+*.gz
+*.zip
+*.tar
+*.log
+.project
+.pydevproject
+.settings
+*.swp
+*.egg-info
+example_project/search_index
+example_project/media/screenshots
+dist
+build
+docs/_build
